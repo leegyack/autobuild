@@ -95,7 +95,7 @@ jobs:
         
     - name: 发布固件
       uses: ncipollo/release-action@v1
-      if: env.UPLOAD_RELEASE == 'true'
+      if: env.REGULAR_UPDATE == 'true'
       with:
         name: nnmy
         tag: binyyy
@@ -105,7 +105,7 @@ jobs:
         
     - name: 发布固件2
       uses: ncipollo/release-action@v1
-      if: env.UPLOAD_RELEASE == 'true'
+      if: env.REGULAR_UPDATE == 'true'
       with:
         name: Github_Tags
         tag: Github_Tags
