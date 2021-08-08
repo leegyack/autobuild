@@ -99,7 +99,7 @@ jobs:
       if: env.REGULAR_UPDATE == 'true'
       with:
         name: 123nnn
-        tag: uuyb
+        tag: AutoUpdate
         token: ${{ secrets.REPO_TOKEN }}
         bodyFile: "update_log.txt"
         artifacts: "Github_Tags/*"
