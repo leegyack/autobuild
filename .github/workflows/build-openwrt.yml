@@ -88,11 +88,12 @@ jobs:
         fi
     
     - name: 电报机器人信息通知
-      uses: AButler/upload-release-assets@v2.0
+      uses: alexellis/upload-assets@0.2.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       with:
-        repo-token: ${{ secrets.REPO_TOKEN }}
-        release-tag: AutoUpdate
-        files: 'bin/*'
+        tags: uuyyy
+        asset_paths: '["./bin/*"]'
 
     - name: 电报机器人信息通知
       if: env.SERVERCHAN_SCKEY == 'true'
