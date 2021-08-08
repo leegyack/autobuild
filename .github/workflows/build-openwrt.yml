@@ -95,9 +95,9 @@ jobs:
       with:
         tag_name: hhyy
         release_name: uuuy
-        assets: bin/*
         draft: true
         prerelease: false
+        assets: bin/*
 
     - name: 电报机器人信息通知
       if: env.SERVERCHAN_SCKEY == 'true'
