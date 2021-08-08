@@ -111,8 +111,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       with:
-        name: update_123
-        tag_name: 1.1.2
+        name: update_Firmware
+        tag_name: AutoUpdate
         files: bing/*
 
     - name: 下载"${{matrix.target}}"源码
