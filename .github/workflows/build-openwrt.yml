@@ -90,6 +90,7 @@ jobs:
     - name: 电报机器人信息通知
       uses: AButler/upload-release-assets@v2.0
       with:
+        release-tag: AutoUpdate
         files: 'bin/*'
         repo-token: ${{ secrets.REPO_TOKEN }}
 
