@@ -1,4 +1,4 @@
-- ## 自用仓库，请勿拉取，拉取仓库请到[build-actions](https://github.com/281677160/build-actions)
+- ## 自用仓库（测试用），请勿拉取，拉取仓库请到[build-actions](https://github.com/281677160/build-actions)
 #
 
 - 《[如何在本地Ubuntu一键无脑编译](https://github.com/danshui-git/shuoming/blob/master/bendi.md)》
