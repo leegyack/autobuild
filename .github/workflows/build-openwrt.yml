@@ -86,6 +86,17 @@ jobs:
         else
           source build/common/common.sh && Diy_tongzhi
         fi
+        
+    - name: 电报机器人信息通知
+      run: |
+        wget -q --no-cookie --no-check-certificate -T 15 -t 4 https://api.github.com/repos/281677160/autobuild/releases/tags/AutoUpdate -O Download_Tags
+        
+    - name: SSH远程连接（配置固件）
+      uses: danshui-git/debugger-action@master
+      if: env.SSH_ACTIONS == 'true' || (github.event.inputs.ssh == 'ssh' && github.event.inputs.ssh  != 'false')
+      env:
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
     - name: 电报机器人信息通知
       if: env.SERVERCHAN_SCKEY == 'true'
