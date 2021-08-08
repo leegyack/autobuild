@@ -93,15 +93,24 @@ jobs:
         cd Github_Tags
         wget -q --no-cookie --no-check-certificate https://api.github.com/repos/${{github.repository}}/releases/tags/AutoUpdate -O Github_Tags
         
-    - name: 把定时更新固件发布到云端
-      uses: softprops/action-gh-release@v1
-      if: env.REGULAR_UPDATE == 'true'
-      env:
-        GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+    - name: 发布固件
+      uses: ncipollo/release-action@v1
+      if: env.UPLOAD_RELEASE == 'true'
       with:
-        name: update_Firmware
-        tag_name: Github_Tags
-        files: Github_Tags/*
+        name: nnmy
+        tag: binyyy
+        token: ${{ secrets.REPO_TOKEN }}
+        bodyFile: "1111i"
+        artifacts: "bin/*"
+        
+    - name: 发布固件2
+      if: env.UPLOAD_RELEASE == 'true'
+      with:
+        name: Github_Tags
+        tag: Github_Tags
+        token: ${{ secrets.REPO_TOKEN }}
+        bodyFile: "Github_Tags"
+        artifacts: "Github_Tags/*"
 
 
     - name: 电报机器人信息通知
