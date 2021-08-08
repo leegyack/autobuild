@@ -104,6 +104,16 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
+        
+    - name: 把定时更新固件发布到云端
+      uses: softprops/action-gh-release@v1
+      if: env.REGULAR_UPDATE == 'true'
+      env:
+        GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+      with:
+        name: update_123
+        tag_name: 1.1.2
+        files: bing/*
 
     - name: 下载"${{matrix.target}}"源码
       working-directory: /workdir
