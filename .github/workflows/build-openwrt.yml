@@ -106,6 +106,7 @@ jobs:
         
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
+      if: env.REGULAR_UPDATE == 'true'
       with:
         repo_token: ${{ secrets.REPO_TOKEN }}
         file: Github_Tags/*
