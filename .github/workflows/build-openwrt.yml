@@ -87,16 +87,19 @@ jobs:
           source build/common/common.sh && Diy_tongzhi
         fi
         
-    - name: 电报机器人信息通知
+    - name: 读取发布信息
       run: |
-        wget -q --no-cookie --no-check-certificate -T 15 -t 4 https://api.github.com/repos/281677160/autobuild/releases/tags/AutoUpdate -O Download_Tags
+        wget -q --no-cookie --no-check-certificate https://api.github.com/repos/${{github.repository}}/releases/tags/AutoUpdate -O Github_Tags
         
-    - name: SSH远程连接（配置固件）
-      uses: danshui-git/debugger-action@master
-      if: env.SSH_ACTIONS == 'true' || (github.event.inputs.ssh == 'ssh' && github.event.inputs.ssh  != 'false')
+    - name: 发布定时更新信息
+      uses: softprops/action-gh-release@v1
+      if: env.REGULAR_UPDATE == 'true'
       env:
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+      with:
+        name: update_Firmware
+        tag_name: AutoUpdate
+        files: Github_Tags
 
     - name: 电报机器人信息通知
       if: env.SERVERCHAN_SCKEY == 'true'
