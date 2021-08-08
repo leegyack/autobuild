@@ -87,13 +87,17 @@ jobs:
           source build/common/common.sh && Diy_tongzhi
         fi
     
-    - name: 电报机器人信息通知
-      uses: alexellis/upload-assets@0.2.2
+    - name: Create release
+      if: env.REGULAR_UPDATE == 'true'
+      uses: toyobayashi/upload-release-assets@v3.0.0
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       with:
-        tags: uuyyy
-        asset_paths: '["./bin/*"]'
+        tag_name: hhyy
+        release_name: uuuy
+        assets: bin/*
+        draft: true
+        prerelease: false
 
     - name: 电报机器人信息通知
       if: env.SERVERCHAN_SCKEY == 'true'
