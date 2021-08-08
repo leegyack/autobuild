@@ -140,13 +140,6 @@ jobs:
           source "${PATH1}/upgrade.sh" && Diy_Part1
         fi
 
-    - name: SSH远程连接（配置固件）
-      uses: danshui-git/debugger-action@master
-      if: env.SSH_ACTIONS == 'true' || (github.event.inputs.ssh == 'ssh' && github.event.inputs.ssh  != 'false')
-      env:
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-
     - name: 生成配置文件
       run: |
         cd openwrt
@@ -178,12 +171,20 @@ jobs:
           source "${PATH1}/common.sh" && Diy_xinxi
         fi
 
+    - name: SSH远程连接（配置固件）
+      uses: danshui-git/debugger-action@master
+      if: env.SSH_ACTIONS == 'true' || (github.event.inputs.ssh == 'ssh' && github.event.inputs.ssh  != 'false')
+      env:
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+
+
     - name: 上传.config配置文件在 github actions
       uses: actions/upload-artifact@v2
       if: env.UPLOAD_CONFIG == 'true'
       with:
         name: .config_${{ env.CODE }}_${{ env.TARGET_PROFILE }}_${{ env.Compile_Date }}
-        path: ${GITHUB_WORKSPACE}/config.txt
+        path: config.txt
 
     - name: 下载软件包
       id: package
