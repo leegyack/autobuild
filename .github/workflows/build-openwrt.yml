@@ -149,7 +149,8 @@ jobs:
 
     - name: 公 告
       run: |
-       cp -Rf openwrt/.config ${GITHUB_WORKSPACE}/con.txt
+        make defconfig
+        cp -Rf openwrt/.config ${GITHUB_WORKSPACE}/con.txt
        
     - name: Upload firmware directory
       uses: actions/upload-artifact@main
