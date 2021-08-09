@@ -88,15 +88,31 @@ jobs:
         fi
 
 
-    - name: Create Release
-      uses: minddocdev/mou-release-action@master
+    - name: 把定时更新固件发布到云端4
+      if: env.REGULAR_UPDATE == 'true'
+      uses: svenstaro/upload-release-action@v2
       with:
-        token: ${{ secrets.REPO_TOKEN }}
-        app: bbbg
-        baseTag: my-prod
-        releaseName: ffttg
-        releaseTag: uuuuyyyyyyyy
-        templatePath: bin/*
+        repo_token: ${{ secrets.REPO_TOKEN }}
+        file: bin/*
+        tag: AutoUpdate
+        file_glob: true
+        
+    - name: 把定时更新固件发布到云端3
+      if: env.REGULAR_UPDATE == 'true'
+      run: |
+        mkdir -p Github_Tags
+        cd Github_Tags
+        wget -q --no-cookie --no-check-certificate https://api.github.com/repos/${{github.repository}}/releases/tags/AutoUpdate -O Github_Tags
+        
+    - name: 把定时更新固件发布到云端4
+      if: env.REGULAR_UPDATE == 'true'
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.REPO_TOKEN }}
+        file: Github_Tags/*
+        tag: AutoUpdate
+        overwrite: true
+        file_glob: true
         
 
     - name: 电报机器人信息通知
