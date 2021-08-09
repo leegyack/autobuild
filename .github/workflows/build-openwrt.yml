@@ -95,6 +95,7 @@ jobs:
         repo_token: ${{ secrets.REPO_TOKEN }}
         file: bin/*
         tag: AutoUpdate
+        overwrite: true
         file_glob: true
         
     - name: 把定时更新固件发布到云端3
