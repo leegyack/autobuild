@@ -93,6 +93,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.REPO_TOKEN }}
+        asset_name: ttyyy
         file: bin/*
         tag: AutoUpdate
         overwrite: true
@@ -110,6 +111,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.REPO_TOKEN }}
+        asset_name: ttyyy
         file: Github_Tags/*
         tag: AutoUpdate
         overwrite: true
