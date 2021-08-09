@@ -97,6 +97,7 @@ jobs:
         asset_name: mything
         tag: AutoUpdate
         overwrite: true
+        file_glob: true
         body: "This is my release text"
         
     - name: 把定时更新固件发布到云端3
@@ -115,6 +116,7 @@ jobs:
         asset_name: mything
         tag: AutoUpdate
         overwrite: true
+        file_glob: true
         body: "This is my release text"
         
 
