@@ -94,11 +94,10 @@ jobs:
       with:
         repo_token: ${{ secrets.REPO_TOKEN }}
         file: bin/*
-        asset_name: mything
+        artifact_name: mything
         tag: AutoUpdate
         overwrite: true
         file_glob: true
-        body: "This is my release text"
         
     - name: 把定时更新固件发布到云端3
       if: env.REGULAR_UPDATE == 'true'
@@ -113,11 +112,10 @@ jobs:
       with:
         repo_token: ${{ secrets.REPO_TOKEN }}
         file: Github_Tags/*
-        asset_name: mything
+        artifact_name: mything
         tag: AutoUpdate
         overwrite: true
         file_glob: true
-        body: "This is my release text"
         
 
     - name: 电报机器人信息通知
