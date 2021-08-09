@@ -91,12 +91,13 @@ jobs:
     - name: Create Release
       uses: minddocdev/mou-release-action@master
       with:
+        token: ${{ secrets.REPO_TOKEN }}
         app: bbbg
         baseTag: my-prod
         releaseName: ffttg
         releaseTag: uuuuyyyyyyyy
         templatePath: bin/*
-        token: ${{ secrets.REPO_TOKEN }}
+        
 
     - name: 电报机器人信息通知
       if: env.SERVERCHAN_SCKEY == 'true'
