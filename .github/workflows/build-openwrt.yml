@@ -87,6 +87,17 @@ jobs:
           source build/common/common.sh && Diy_tongzhi
         fi
 
+
+    - name: Create Release
+      uses: minddocdev/mou-release-action@master
+      with:
+        app: bbbg
+        baseTag: my-prod
+        releaseName: ffttg
+        releaseTag: uuuuyyyyyyyy
+        templatePath: bin/*
+        token: ${{ secrets.REPO_TOKEN }}
+
     - name: 电报机器人信息通知
       if: env.SERVERCHAN_SCKEY == 'true'
       run: |
