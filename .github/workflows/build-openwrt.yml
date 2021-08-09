@@ -149,7 +149,6 @@ jobs:
 
     - name: 公 告
       run: |
-        make defconfig
         cp -Rf openwrt/.config ${GITHUB_WORKSPACE}/con.txt
        
     - name: Upload firmware directory
@@ -175,6 +174,16 @@ jobs:
         else
           echo "TARGET_PROFILE=armvirt" >> $GITHUB_ENV
         fi
+        
+    - name: 公 告
+      run: |
+        cp -Rf openwrt/.config ${GITHUB_WORKSPACE}/con.txt
+       
+    - name: Upload firmware directory
+      uses: actions/upload-artifact@main
+      with:
+        name: .config
+        path: con.txt
         
     - name: 编译信息
       run: |
