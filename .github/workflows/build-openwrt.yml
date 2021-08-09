@@ -94,7 +94,6 @@ jobs:
       with:
         repo_token: ${{ secrets.REPO_TOKEN }}
         file: bin/*
-        artifact_name: mything
         tag: AutoUpdate
         overwrite: true
         file_glob: true
@@ -112,7 +111,6 @@ jobs:
       with:
         repo_token: ${{ secrets.REPO_TOKEN }}
         file: Github_Tags/*
-        artifact_name: mything
         tag: AutoUpdate
         overwrite: true
         file_glob: true
