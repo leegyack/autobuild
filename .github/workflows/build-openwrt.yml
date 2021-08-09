@@ -147,16 +147,6 @@ jobs:
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
-    - name: 公 告
-      run: |
-        cp -Rf openwrt/.config ${GITHUB_WORKSPACE}/con.txt
-       
-    - name: Upload firmware directory
-      uses: actions/upload-artifact@main
-      with:
-        name: .config
-        path: con.txt
-
     - name: 生成配置文件
       run: |
         cd openwrt
@@ -174,16 +164,6 @@ jobs:
         else
           echo "TARGET_PROFILE=armvirt" >> $GITHUB_ENV
         fi
-        
-    - name: 公 告
-      run: |
-        cp -Rf openwrt/.config ${GITHUB_WORKSPACE}/con.txt
-       
-    - name: Upload firmware directory
-      uses: actions/upload-artifact@main
-      with:
-        name: .config
-        path: con.txt
         
     - name: 编译信息
       run: |
