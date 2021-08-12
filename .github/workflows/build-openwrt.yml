@@ -140,12 +140,7 @@ jobs:
           source "${PATH1}/upgrade.sh" && Diy_Part1
         fi
 
-    - name: SSH远程连接（配置固件）
-      uses: danshui-git/debugger-action@master
-      if: env.SSH_ACTIONS == 'true' || (github.event.inputs.ssh == 'ssh' && github.event.inputs.ssh  != 'false')
-      env:
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+
 
     - name: 生成配置文件
       run: |
@@ -177,6 +172,14 @@ jobs:
           source "${PATH1}/upgrade.sh" > /dev/null 2>&1
           source "${PATH1}/common.sh" && Diy_xinxi
         fi
+
+    - name: SSH远程连接（配置固件）
+      uses: danshui-git/debugger-action@master
+      if: env.SSH_ACTIONS == 'true' || (github.event.inputs.ssh == 'ssh' && github.event.inputs.ssh  != 'false')
+      env:
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+
 
     - name: 上传.config配置文件在 github actions
       uses: actions/upload-artifact@v2
