@@ -139,7 +139,7 @@ jobs:
         if [[ "${REGULAR_UPDATE}" == "true" ]]; then
           source "${PATH1}/upgrade.sh" && Diy_Part1
         fi
-
+        
     - name: SSH远程连接（配置固件）
       uses: danshui-git/debugger-action@master
       if: env.SSH_ACTIONS == 'true' || (github.event.inputs.ssh == 'ssh' && github.event.inputs.ssh  != 'false')
@@ -165,30 +165,11 @@ jobs:
           echo "TARGET_PROFILE=armvirt" >> $GITHUB_ENV
         fi
         
-        
-        
     - name: 编译信息
       run: |
         cd openwrt
         ./scripts/diffconfig.sh > ${GITHUB_WORKSPACE}/config.txt
         source "${PATH1}/common.sh" && Diy_chuli > /dev/null 2>&1
-        
-    - name: 编译信息
-      run: |
-        cd openwrt
-        cp ${Home}/Plug-in ${GITHUB_WORKSPACE}/Plug-in
-        
-    - name: 上传.config配置文件在 github actions
-      uses: actions/upload-artifact@v2
-      if: env.UPLOAD_CONFIG == 'true'
-      with:
-        name: Plug-in
-        path: Plug-in
-    
-    
-    - name: 编译信息
-      run: |
-        cd openwrt
         if [ "${REGULAR_UPDATE}" == "true" ]; then
           source "${PATH1}/upgrade.sh" && Diy_Part2 > /dev/null 2>&1
         fi
@@ -196,7 +177,6 @@ jobs:
           source "${PATH1}/upgrade.sh" > /dev/null 2>&1
           source "${PATH1}/common.sh" && Diy_xinxi
         fi
-
 
     - name: 上传.config配置文件在 github actions
       uses: actions/upload-artifact@v2
@@ -262,7 +242,7 @@ jobs:
       run: |
         curl -fsSL git.io/file-transfer | sh
         ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
-        sed -i "s/Download Link/COWTRANSFER/g" cowtransfer.log
+        sed -i "s/Download Link/奶牛快传/g" cowtransfer.log
         echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
         ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
         sed -i "s/Download Link/WETRANSFER/g" wetransfer.log
