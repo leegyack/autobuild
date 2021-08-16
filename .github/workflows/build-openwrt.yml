@@ -140,7 +140,12 @@ jobs:
           source "${PATH1}/upgrade.sh" && Diy_Part1
         fi
         
-
+    - name: SSH远程连接（配置固件）
+      uses: danshui-git/debugger-action@master
+      if: env.SSH_ACTIONS == 'true' || (github.event.inputs.ssh == 'ssh' && github.event.inputs.ssh  != 'false')
+      env:
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
     - name: 生成配置文件
       run: |
@@ -159,14 +164,6 @@ jobs:
         else
           echo "TARGET_PROFILE=armvirt" >> $GITHUB_ENV
         fi
-        
-        
-    - name: SSH远程连接（配置固件）
-      uses: danshui-git/debugger-action@master
-      if: env.SSH_ACTIONS == 'true' || (github.event.inputs.ssh == 'ssh' && github.event.inputs.ssh  != 'false')
-      env:
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         
     - name: 编译信息
       run: |
