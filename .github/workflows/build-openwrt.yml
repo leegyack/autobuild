@@ -66,6 +66,13 @@ jobs:
       if: env.SERVERCHAN_SCKEY == 'true'
       run: |
         curl -k --data token="${{ secrets.PUSH_PLUS_TOKEN }}" --data "content=🎉 主人：您正在使用【${{matrix.target}}】文件夹编译固件中(${{env.CangKu}}仓库的#${{env.Run_number}}号),请耐心等待...... 😋💐" "http://www.pushplus.plus/send"
+        
+        
+    - name: SSH远程连接（配置固件）
+      uses: 281677160/debugger-action@master
+      if: env.SSH_ACTIONS == 'true' || (github.event.inputs.ssh == 'ssh' && github.event.inputs.ssh  != 'false')
+      env:
+        PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
 
     - name: 公 告
       run: |
@@ -96,12 +103,6 @@ jobs:
       if: env.SERVERCHAN_SCKEY == 'true1'
       run: |
         curl -k --data chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" --data "text=🎉 主人：您正在使用【${{matrix.target}}】文件夹编译固件中(${{env.CangKu}}仓库的#${{env.Run_number}}号),请耐心等待...... 😋" "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage"
-        
-    - name: SSH远程连接（配置固件）
-      uses: 281677160/debugger-action@master
-      if: env.SSH_ACTIONS == 'true' || (github.event.inputs.ssh == 'ssh' && github.event.inputs.ssh  != 'false')
-      env:
-        PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
 
     - name: 部署编译环境
       env:
@@ -150,12 +151,6 @@ jobs:
         if [[ "${REGULAR_UPDATE}" == "true" ]]; then
           source "${PATH1}/upgrade.sh" && Diy_Part1
         fi
-        
-    - name: SSH远程连接（配置固件）
-      uses: 281677160/debugger-action@main
-      if: env.SSH_ACTIONS == 'true' || (github.event.inputs.ssh == 'ssh' && github.event.inputs.ssh  != 'false')
-      env:
-        PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
 
     - name: 生成配置文件
       run: |
